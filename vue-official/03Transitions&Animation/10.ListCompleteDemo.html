@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+  <!-- 列表的进入/离开过渡例子的基础上，加洗牌和动画效果的完整示例 -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+  <div id="list-complete-demo" class="demo">
+    <button v-on:click="shuffle">Shuffle</button>
+    <button v-on:click="add">Add</button>
+    <button v-on:click="remove">Remove</button>
+    <transition-group name="list-complete" tag="p">
+      <span v-for="item in items" :key="item" class="list-complete-item">
+        {{ item }}
+      </span>
+    </transition-group>
+  </div>
+  <script>
+    new Vue({
+      el: '#list-complete-demo',
+      data: {
+        items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        nextNum: 10
+      },
+      methods: {
+        randomIndex: function () {
+          return Math.floor(Math.random() * this.items.length)
+        },
+        add: function () {
+          this.items.splice(this.randomIndex(), 0, this.nextNum++)
+        },
+        remove: function () {
+          this.items.splice(this.randomIndex(), 1)
+        },
+        shuffle: function () {
+          this.items = _.shuffle(this.items)
+        }
+      }
+    })
+  </script>
+  <style>
+    .list-complete-item {
+      transition: all 1s;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .list-complete-enter,
+    .list-complete-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .list-complete-leave-active {
+      position: absolute;
+    }
+  </style>
+  <!-- 需要注意的是使用 FLIP 过渡的元素不能设置为 display: inline 。
+    作为替代方案，可以设置为 display: inline-block 或者放置于 flex 中 -->
+</body>
+
+</html>

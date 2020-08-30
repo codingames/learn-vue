@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>状态过渡</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+  <!-- 状态动画与侦听器 -->
+  <!-- 使用 GreenSock 一个例子 -->
+  <!-- 数值更新时，就会触发动画 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+  <div id="animated-number-demo" class="demo">
+    <input v-model.number="number" type="number" step="20">
+    <p>{{ animatedNumber }}</p>
+  </div>
+  <script>
+    new Vue({
+      el: '#animated-number-demo',
+      data: {
+        number: 0,
+        tweenedNumber: 0
+      },
+      computed: {
+        animatedNumber: function () {
+          return this.tweenedNumber.toFixed(0);
+        }
+      },
+      watch: {
+        number: function (newValue) {
+          gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue });
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>
