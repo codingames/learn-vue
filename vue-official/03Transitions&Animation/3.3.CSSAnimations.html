@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+  <div id="example-2" class="demo">
+    <button @click="show = !show">Toggle show</button>
+    <transition name="bounce">
+      <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia
+        diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+    </transition>
+  </div>
+
+  <style>
+    .bounce-enter-active {
+      -webkit-animation: bounce-in .5s;
+      animation: bounce-in .5s;
+    }
+
+    .bounce-leave-active {
+      -webkit-animation: bounce-in .5s reverse;
+      animation: bounce-in .5s reverse;
+    }
+    /* 通过 @keyframes 规则创建动画，
+    创建动画的原理是，将一套 CSS 样式逐渐变化为另一套样式。*/
+    @keyframes bounce-in {
+      0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      }
+
+      50% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+      }
+
+      100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+    }
+    /* 以百分比来规定改变发生的时间，或者通过关键词 "from" 和 "to"，
+    等价于 0% 和 100%。0% 是动画的开始时间，100% 动画的结束时间。  */
+    @-webkit-keyframes bounce-in {
+      0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      }
+
+      50% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+      }
+
+      100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+    }
+  </style>
+  <script>
+    new Vue({
+      el: '#example-2',
+      data: {
+        show: true
+      }
+    })
+  </script>
+</body>
+
+</html>
