@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>自定义指令</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+  <script src="https://unpkg.com/vue"></script>
+  <div id="simplest-directive-example" class="demo">
+    <!-- 下面定义好局部指令后可以在模板中任何元素上使用新的 v-focus property -->
+    <input v-focus>
+  </div>
+  <script>
+
+    new Vue({
+      el: '#simplest-directive-example',
+      // 注册局部指令
+      directives: {
+        focus: {
+          // directive definition 指令的定义
+          inserted: function (el) {
+            el.focus()
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

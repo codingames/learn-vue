@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>自定义指令</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+  <div id="hook-arguments-example" v-demo:foo.a.b="message" class="demo"></div>
+  <script>
+    Vue.directive('demo', {
+      bind: function (el, binding, vnode) {
+        var s = JSON.stringify
+        el.innerHTML =
+          'name: ' + s(binding.name) + '<br>' +                // "demo"
+          'value: ' + s(binding.value) + '<br>' +              // "hello!"
+          'expression: ' + s(binding.expression) + '<br>' +    //"message"
+          'argument: ' + s(binding.arg) + '<br>' +             // "foo"
+          'modifiers: ' + s(binding.modifiers) + '<br>' +      // {"a":true,"b":true}
+          'vnode keys: ' + Object.keys(vnode).join(', ')       //  tag, data, children, text, elm, ns, context, fnContext, fnOptions, fnScopeId, key, componentOptions, componentInstance, parent, raw, isStatic, isRootInsert, isComment, isCloned, isOnce, asyncFactory, asyncMeta, isAsyncPlaceholder
+      }
+    })
+    new Vue({
+      el: '#hook-arguments-example',
+      data: {
+        message: 'hello!'
+      }
+    })
+  </script>
+</body>
+
+</html>

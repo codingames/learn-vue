@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>自定义指令</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+  <script src="https://unpkg.com/vue"></script>
+  <div id="simplest-directive-example" class="demo">
+    <input v-focus>
+  </div>
+  <script>
+    // 指令的定义：注册一个全局自定义指令 `v-focus`
+    Vue.directive('focus', {
+      // 当被绑定的元素插入到 DOM 中时……
+      inserted: function (el) {
+        // 聚焦元素
+        el.focus()
+      }
+    })
+    new Vue({
+      el: '#simplest-directive-example'
+    })
+  </script>
+</body>
+
+</html>
