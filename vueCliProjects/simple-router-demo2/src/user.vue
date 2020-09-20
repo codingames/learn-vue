@@ -34,6 +34,7 @@ export default {
     <div>我是user组件, 动态部分是{{dynamicSegment}}</div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
